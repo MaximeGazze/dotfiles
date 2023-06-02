@@ -6,7 +6,6 @@
 [[ $- != *i* ]] && return
 
 alias ls='ls --color=auto'
-alias la='ls -la'
 alias ll='ls -lah'
 alias ip='ip -c'
 alias gitc='git config --global credential.helper store'

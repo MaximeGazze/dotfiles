@@ -1,0 +1,52 @@
+{
+    "editor.minimap.enabled": false,
+    "vim.statusBarColorControl": true,
+    "vim.statusBarColors.normal": "#DFA419",
+    "vim.statusBarColors.insert": "#65C00B",
+    "vim.statusBarColors.replace": "#C46526",
+    "vim.statusBarColors.visual": "#B48EAD",
+    "vim.statusBarColors.visualline": "#B48EAD",
+    "vim.statusBarColors.visualblock": "#A3BE8C",
+    "vim.useSystemClipboard": true,
+    "vim.visualModeKeyBindingsNonRecursive": [
+        {
+            "before": ["p"],
+            "after": ["\"", "_", "d", "P"]
+        }
+    ],
+    "extensions.ignoreRecommendations": true,
+    "workbench.colorCustomizations": {
+        "statusBar.foreground": "#000000",
+        "statusBar.background": "#DFA419",
+        "statusBar.noFolderBackground": "#DFA419",
+        "statusBar.debuggingBackground": "#DFA419"
+    },
+    "workbench.colorTheme": "Spacemacs - dark",
+    "glassit.alpha": 240,
+    "explorer.confirmDragAndDrop": false,
+    "explorer.confirmDelete": false,
+    "svelte.enable-ts-plugin": true,
+    "workbench.startupEditor": "none",
+    "html.format.indentInnerHtml": true,
+    "[javascript]": {
+        "editor.tabSize": 2
+    },
+    "[typescript]": {
+        "editor.tabSize": 2
+    },
+    "[html]": {
+        "editor.tabSize": 2
+    },
+    "[css]": {
+        "editor.tabSize": 2
+    },
+    "[svelte]": {
+        "editor.tabSize": 2
+    },
+    "redhat.telemetry.enabled": false,
+    "editor.acceptSuggestionOnCommitCharacter": false,
+    "editor.acceptSuggestionOnEnter": "off",
+    "terminal.integrated.enableMultiLinePasteWarning": false,
+    "rust-analyzer.checkOnSave.command": "clippy",
+    "svelte.plugin.svelte.note-new-transformation": false
+}
