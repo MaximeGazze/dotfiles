@@ -17,9 +17,9 @@
     "extensions.ignoreRecommendations": true,
     "workbench.colorCustomizations": {
         "statusBar.foreground": "#000000",
-        "statusBar.background": "#DFA419",
-        "statusBar.noFolderBackground": "#DFA419",
-        "statusBar.debuggingBackground": "#DFA419"
+        "statusBar.background": "#65C00B",
+        "statusBar.noFolderBackground": "#65C00B",
+        "statusBar.debuggingBackground": "#65C00B"
     },
     "workbench.colorTheme": "Spacemacs - dark",
     "glassit.alpha": 240,

@@ -1,12 +1,8 @@
-/*******************************************************
- * ROFI configs i3 Apps menu for EndeavourOS
- * Maintainer: joekamprad <joekamprad@endeavouros.com>
- *******************************************************/
 configuration {
     font:				"Sourcecode Pro Regular 10";
     show-icons:				true;
     icon-theme:				"Arc-X-D";
-    display-drun:			"Apps";
+    display-drun:			"Applications";
     drun-display-format:		"{name}";
     scroll-method:			0;
     disable-history:			false;
@@ -16,8 +12,9 @@ configuration {
 @import "~/.config/rofi/arc_dark_transparent_colors.rasi"
 
 window {
-    background-color: @background;
-    border: 0;
+    background-color: #282a2e;
+    border-color: #554771;
+    border: 1;
     padding: 30;
 }
 listview {
