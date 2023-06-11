@@ -1,5 +1,5 @@
 configuration {
-    font:				"Sourcecode Pro Regular 10";
+    font:				"Sourcecode Pro Regular 14";
     show-icons:				true;
     icon-theme:				"Arc-X-D";
     display-drun:			"Applications";
@@ -16,10 +16,11 @@ window {
     border-color: #554771;
     border: 1;
     padding: 30;
+    width: 700px;
 }
 listview {
     lines: 10;
-    columns: 3;
+    columns: 1;
 }
 mainbox {
     border: 0;
