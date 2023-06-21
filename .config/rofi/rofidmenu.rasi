@@ -1,5 +1,5 @@
 configuration {
-    font:				"Sourcecode Pro Regular 14";
+    font:				"Sourcecode Pro Regular 11";
     show-icons:				true;
     icon-theme:				"Arc-X-D";
     display-drun:			"Applications";
@@ -12,7 +12,7 @@ configuration {
 @import "~/.config/rofi/arc_dark_transparent_colors.rasi"
 
 window {
-    background-color: #282a2e;
+    background-color: rgba(40,42,46,90%);
     border-color: #554771;
     border: 1;
     padding: 30;

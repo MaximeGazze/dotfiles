@@ -580,8 +580,6 @@ If you are unsure, try setting them in `dotspacemacs/user-config' first."
   (setq css-indent-offset 2) ; css-mode
   (setq tab-width 4)
   ;; (setq go-tab-width 2)
-  ;; (setq-default message-log-max nil)
-  ;; (kill-buffer "*Messages*")
   (setq mmm-js-mode-enter-hook (lambda () (setq syntax-ppss-table nil)))
   (setq mmm-typescript-mode-enter-hook (lambda () (setq syntax-ppss-table nil)))
   (add-hook 'vue-mode-hook (lambda () (setq syntax-ppss-table nil)))
