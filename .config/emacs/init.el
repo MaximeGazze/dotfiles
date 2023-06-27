@@ -21,7 +21,8 @@
 
 ;; indent
 (setq c-default-style "k&r"
-      c-basic-offset 2)
+      c-basic-offset 3)
+(c-set-offset 'case-label '+)
 (setq javascript-indent-level 2) ; javascript-mode
 (setq typescript-indent-level 2) ; typescript-mode
 (setq js-indent-level 2) ; js-mode
@@ -41,8 +42,12 @@
 (tool-bar-mode -1)
 (scroll-bar-mode -1)
 ;; display line numbers
-(global-display-line-numbers-mode 1)
+;; (global-display-line-numbers-mode 1)
+(add-hook 'prog-mode-hook 'display-line-numbers-mode)
 (global-visual-line-mode t)
+;; transparency
+(set-frame-parameter nil 'alpha-background 90)
+(add-to-list 'default-frame-alist '(alpha-background . 90))
 ;; zoom
 (global-set-key (kbd "C-=") 'text-scale-increase)
 (global-set-key (kbd "C--") 'text-scale-decrease)
@@ -96,16 +101,19 @@
   :custom
   (setq ivy-use-virtual-buffers t)
   (setq ivy-count-format "(%d/%d) ")
-  (setq ivy-use-selectable-prompt t)
   (setq enable-recursive-minibuffers t)
   (setq ivy-display-style 'fancy)
   :config
   (ivy-mode)
-  (define-key ivy-minibuffer-map (kbd "<escape>") 'minibuffer-keyboard-quit))
+  (define-key ivy-minibuffer-map (kbd "<escape>") 'minibuffer-keyboard-quit)
+  (define-key ivy-minibuffer-map (kbd "<tab>") 'ivy-alt-done))
 
 (use-package counsel
   :after ivy
-  :config (counsel-mode))
+  :config
+  (setq ivy-use-selectable-prompt t)
+  (setq ivy-initial-inputs-alist ())
+  (counsel-mode))
 
 (use-package all-the-icons-ivy-rich
   :ensure t
