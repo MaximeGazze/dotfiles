@@ -45,6 +45,7 @@
 ;; (global-display-line-numbers-mode 1)
 (add-hook 'prog-mode-hook 'display-line-numbers-mode)
 (global-visual-line-mode t)
+(column-number-mode t)
 ;; transparency
 (set-frame-parameter nil 'alpha-background 90)
 (add-to-list 'default-frame-alist '(alpha-background . 90))
@@ -72,6 +73,7 @@
   (setq evil-want-keybinding nil)
   (setq evil-vsplit-window-right t)
   (setq evil-hsplit-window-below t)
+  (setq evil-kill-on-visual-paste nil)
   (evil-mode)
   (evil-set-undo-system 'undo-redo))
 
@@ -169,6 +171,16 @@
 	which-key-max-description-length 25
 	which-key-allow-imprecise-window-fit t
 	which-key-separator " → " ))
+
+(use-package hl-todo
+       :hook (prog-mode . hl-todo-mode))
+
+(use-package markdown-mode
+  :ensure t
+  :mode ("README\\.md\\'" . gfm-mode)
+  :init (setq markdown-command "multimarkdown")
+  :bind (:map markdown-mode-map
+         ("C-c C-e" . markdown-do)))
 
 (use-package general
   :config
