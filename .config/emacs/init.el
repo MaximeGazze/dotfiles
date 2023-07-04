@@ -3,20 +3,18 @@
 
 ;; fonts
 (set-face-attribute 'default nil
-		    :font "Source Code Pro"
-		    :height 110
-		    :weight 'medium)
+										:font "Source Code Pro"
+										:height 110
+										:weight 'medium)
 (set-face-attribute 'variable-pitch nil
-		    :font "Noto Sans"
-		    :height 110
-		    :weight 'medium)
+										:font "Noto Sans"
+										:height 110
+										:weight 'medium)
 (set-face-attribute 'fixed-pitch nil
-		    :font "Source Code Pro"
-		    :height 110
-		    :weight 'medium)
+										:font "Source Code Pro"
+										:height 110
+										:weight 'medium)
 (add-to-list 'default-frame-alist '(font . "Source Code Pro-11"))
-
-;; Uncomment the following line if line spacing needs adjusting.
 (setq-default line-spacing 0.12)
 
 ;; indent
@@ -31,12 +29,14 @@
 (setq web-mode-css-indent-offset 2) ; web-mode, css in html file
 (setq web-mode-code-indent-offset 2) ; web-mode, js code in html file
 (setq css-indent-offset 2) ; css-mode
-(setq tab-width 4)
+(setq-default tab-width 2)
 
 ;; Fix bad defaults
 (setq x-select-enable-clipboard-manager nil)
 (setq make-backup-files nil)
+(setq create-lockfiles nil)
 (setq undo-tree-history-directory-alist '(("." . "~/.config/emacs/undo")))
+(setq undo-tree-enable-undo-in-region nil)
 ;; disable menubar
 (menu-bar-mode -1)
 (tool-bar-mode -1)
@@ -90,6 +90,24 @@
   :config
   (global-undo-tree-mode 1))
 
+
+(use-package lsp-mode
+  :init
+  (setq lsp-enable-snippet nil)
+  (setq lsp-headerline-breadcrumb-enable nil))
+
+(use-package lsp-ui)
+
+(use-package company
+  :ensure t
+  :init
+  (setq company-idle-delay 0)
+  (setq company-minimum-prefix-length 1)
+  :bind (:map company-active-map
+              ("<tab>" . company-complete-selection)
+							("<return>" . nil)
+							("RET" . nil)))
+
 (use-package all-the-icons
   :ensure t
   :if (display-graphic-p))
@@ -98,8 +116,6 @@
   :hook (dired-mode . (lambda () (all-the-icons-dired-mode t))))
 
 (use-package ivy
-  :bind
-  (("C-x B" . ivy-switch-buffer-other-window))
   :custom
   (setq ivy-use-virtual-buffers t)
   (setq ivy-count-format "(%d/%d) ")
@@ -107,14 +123,15 @@
   (setq ivy-display-style 'fancy)
   :config
   (ivy-mode)
-  (define-key ivy-minibuffer-map (kbd "<escape>") 'minibuffer-keyboard-quit)
-  (define-key ivy-minibuffer-map (kbd "<tab>") 'ivy-alt-done))
+  (setq ivy-use-selectable-prompt t)
+  (setq ivy-initial-inputs-alist ())
+  :bind (:map ivy-minibuffer-map
+              ("<tab>" . ivy-alt-done)
+							("<escape>" . minibuffer-keyboard-quit)))
 
 (use-package counsel
   :after ivy
   :config
-  (setq ivy-use-selectable-prompt t)
-  (setq ivy-initial-inputs-alist ())
   (counsel-mode))
 
 (use-package all-the-icons-ivy-rich
@@ -127,8 +144,8 @@
   :init (ivy-rich-mode 1) ;; this gets us descriptions in M-x.
   :custom
   (ivy-virtual-abbreviate 'full
-			  ivy-rich-switch-buffer-align-virtual-buffer t
-			  ivy-rich-path-style 'abbrev)
+													ivy-rich-switch-buffer-align-virtual-buffer t
+													ivy-rich-path-style 'abbrev)
   :config
   (ivy-set-display-transformer 'ivy-switch-buffer
                                'ivy-rich-switch-buffer-transformer))
@@ -138,13 +155,13 @@
   :config
   (eshell-syntax-highlighting-global-mode +1)
   (setq eshell-rc-script (concat user-emacs-directory "eshell/profile")
-	eshell-aliases-file (concat user-emacs-directory "eshell/aliases")
-	eshell-history-size 5000
-	eshell-buffer-maximum-lines 5000
-	eshell-hist-ignoredups t
-	eshell-scroll-to-bottom-on-input t
-	eshell-destroy-buffer-when-process-dies t
-	eshell-visual-commands'("bash" "fish" "htop" "ssh" "top" "zsh")))
+				eshell-aliases-file (concat user-emacs-directory "eshell/aliases")
+				eshell-history-size 5000
+				eshell-buffer-maximum-lines 5000
+				eshell-hist-ignoredups t
+				eshell-scroll-to-bottom-on-input t
+				eshell-destroy-buffer-when-process-dies t
+				eshell-visual-commands'("bash" "fish" "htop" "ssh" "top" "zsh")))
 
 (use-package spacemacs-theme
   :config (load-theme 'spacemacs-dark t))
@@ -154,33 +171,40 @@
 
 (use-package restart-emacs)
 
-;; which-key
 (use-package which-key
-  :init
-  (which-key-mode 1)
+  :init (which-key-mode 1)
   :config
   (setq which-key-side-window-location 'bottom
-	which-key-sort-order #'which-key-key-order-alpha
-	which-key-sort-uppercase-first nil
-	which-key-add-column-padding 1
-	which-key-max-display-columns nil
-	which-key-min-display-lines 6
-	which-key-side-window-slot -10
-	which-key-side-window-max-height 0.25
-	which-key-idle-delay 0.8
-	which-key-max-description-length 25
-	which-key-allow-imprecise-window-fit t
-	which-key-separator " → " ))
+				which-key-sort-order #'which-key-key-order-alpha
+				which-key-sort-uppercase-first nil
+				which-key-add-column-padding 1
+				which-key-max-display-columns nil
+				which-key-min-display-lines 6
+				which-key-side-window-slot -10
+				which-key-side-window-max-height 0.25
+				which-key-idle-delay 0.8
+				which-key-max-description-length 25
+				which-key-allow-imprecise-window-fit t
+				which-key-separator " → " ))
 
 (use-package hl-todo
-       :hook (prog-mode . hl-todo-mode))
+  :hook (prog-mode . hl-todo-mode))
 
 (use-package markdown-mode
   :ensure t
   :mode ("README\\.md\\'" . gfm-mode)
   :init (setq markdown-command "multimarkdown")
   :bind (:map markdown-mode-map
-         ("C-c C-e" . markdown-do)))
+							("C-c C-e" . markdown-do)))
+
+(use-package go-mode
+  :ensure t
+  :init
+  (setq tab-width 4)
+  :hook
+  (before-save . lsp-format-buffer)
+  (before-save . lsp-organize-imports)
+  (go-mode . lsp-deferred))
 
 (use-package general
   :config
