@@ -19,7 +19,7 @@
 
 ;; indent
 (setq c-default-style "k&r"
-      c-basic-offset 3)
+      c-basic-offset 2)
 (c-set-offset 'case-label '+)
 (setq javascript-indent-level 2) ; javascript-mode
 (setq typescript-indent-level 2) ; typescript-mode
