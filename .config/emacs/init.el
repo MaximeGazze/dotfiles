@@ -29,7 +29,7 @@
 (setq web-mode-css-indent-offset 2) ; web-mode, css in html file
 (setq web-mode-code-indent-offset 2) ; web-mode, js code in html file
 (setq css-indent-offset 2) ; css-mode
-(setq-default tab-width 2)
+(setq-default tab-width 4)
 
 ;; Fix bad defaults
 (setq x-select-enable-clipboard-manager nil)
@@ -75,7 +75,8 @@
   (setq evil-hsplit-window-below t)
   (setq evil-kill-on-visual-paste nil)
   (evil-mode)
-  (evil-set-undo-system 'undo-redo))
+  ;; (evil-set-undo-system 'undo-redo)
+  )
 
 (use-package evil-collection
   :after evil
@@ -83,12 +84,12 @@
   (setq evil-collection-mode-list '(dashboard dired ibuffer))
   (evil-collection-init))
 
-(use-package undo-tree
-  :ensure t
-  :after evil
-  :diminish
-  :config
-  (global-undo-tree-mode 1))
+;; (use-package undo-tree
+;;   :ensure t
+;;   :after evil
+;;   :diminish
+;;   :config
+;;   (global-undo-tree-mode 1))
 
 
 (use-package lsp-mode
@@ -199,12 +200,16 @@
 
 (use-package go-mode
   :ensure t
-  :init
-  (setq tab-width 4)
   :hook
   (before-save . lsp-format-buffer)
   (before-save . lsp-organize-imports)
   (go-mode . lsp-deferred))
+
+(use-package rustic
+	:ensure t
+	:custom (rustic-analyzer-command '("rustup" "run" "gentoo" "rust-analyzer"))
+	:hook
+	(rustic-mode . lsp-deferred))
 
 (use-package general
   :config
