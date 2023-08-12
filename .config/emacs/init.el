@@ -211,6 +211,11 @@
 	:hook
 	(rustic-mode . lsp-deferred))
 
+(use-package elixir-mode
+  :ensure t
+  :hook
+  (before-save . elixir-format))
+
 (use-package general
   :config
   (general-evil-setup)

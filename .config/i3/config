@@ -183,7 +183,7 @@ workspace 3 output DP-0
 # exec --no-startup-id ~/.config/screenlayout/layout.sh
 
 # Transparency
-exec --no-startup-id picom -CGb
+exec --no-startup-id picom -b
 
 # networkmanager-applet
 #exec --no-startup-id nm-applet
