@@ -1,4 +1,5 @@
 if shopt -q login_shell; then
+    export __GL_SHADER_DISK_CACHE_PATH=~/.cache/nv
     [[ -f ~/.bashrc ]] && source ~/.bashrc
     [[ -t 0 && $(tty) == /dev/tty1 && ! $DISPLAY ]] && exec startx
 else

@@ -3,24 +3,28 @@
 
 ;; fonts
 (set-face-attribute 'default nil
-										:font "Source Code Pro"
-										:height 110
-										:weight 'medium)
+					:font "Source Code Pro"
+					:height 110
+					:weight 'medium)
 (set-face-attribute 'variable-pitch nil
-										:font "Noto Sans"
-										:height 110
-										:weight 'medium)
+					:font "Noto Sans"
+					:height 110
+					:weight 'medium)
 (set-face-attribute 'fixed-pitch nil
-										:font "Source Code Pro"
-										:height 110
-										:weight 'medium)
+					:font "Source Code Pro"
+					:height 110
+					:weight 'medium)
 (add-to-list 'default-frame-alist '(font . "Source Code Pro-11"))
 (setq-default line-spacing 0.12)
 
 ;; indent
 (setq c-default-style "k&r"
-      c-basic-offset 2)
+      c-basic-offset 4)
+(setq-default indent-tabs-mode nil)
 (c-set-offset 'case-label '+)
+(c-set-offset 'access-label '/)
+;; (add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
+
 (setq javascript-indent-level 2) ; javascript-mode
 (setq typescript-indent-level 2) ; typescript-mode
 (setq js-indent-level 2) ; js-mode
@@ -106,8 +110,8 @@
   (setq company-minimum-prefix-length 1)
   :bind (:map company-active-map
               ("<tab>" . company-complete-selection)
-							("<return>" . nil)
-							("RET" . nil)))
+			  ("<return>" . nil)
+			  ("RET" . nil)))
 
 (use-package all-the-icons
   :ensure t
@@ -128,7 +132,7 @@
   (setq ivy-initial-inputs-alist ())
   :bind (:map ivy-minibuffer-map
               ("<tab>" . ivy-alt-done)
-							("<escape>" . minibuffer-keyboard-quit)))
+			  ("<escape>" . minibuffer-keyboard-quit)))
 
 (use-package counsel
   :after ivy
@@ -145,8 +149,8 @@
   :init (ivy-rich-mode 1) ;; this gets us descriptions in M-x.
   :custom
   (ivy-virtual-abbreviate 'full
-													ivy-rich-switch-buffer-align-virtual-buffer t
-													ivy-rich-path-style 'abbrev)
+						  ivy-rich-switch-buffer-align-virtual-buffer t
+						  ivy-rich-path-style 'abbrev)
   :config
   (ivy-set-display-transformer 'ivy-switch-buffer
                                'ivy-rich-switch-buffer-transformer))
@@ -156,13 +160,13 @@
   :config
   (eshell-syntax-highlighting-global-mode +1)
   (setq eshell-rc-script (concat user-emacs-directory "eshell/profile")
-				eshell-aliases-file (concat user-emacs-directory "eshell/aliases")
-				eshell-history-size 5000
-				eshell-buffer-maximum-lines 5000
-				eshell-hist-ignoredups t
-				eshell-scroll-to-bottom-on-input t
-				eshell-destroy-buffer-when-process-dies t
-				eshell-visual-commands'("bash" "fish" "htop" "ssh" "top" "zsh")))
+		eshell-aliases-file (concat user-emacs-directory "eshell/aliases")
+		eshell-history-size 5000
+		eshell-buffer-maximum-lines 5000
+		eshell-hist-ignoredups t
+		eshell-scroll-to-bottom-on-input t
+		eshell-destroy-buffer-when-process-dies t
+		eshell-visual-commands'("bash" "fish" "htop" "ssh" "top" "zsh")))
 
 (use-package spacemacs-theme
   :config (load-theme 'spacemacs-dark t))
@@ -176,17 +180,20 @@
   :init (which-key-mode 1)
   :config
   (setq which-key-side-window-location 'bottom
-				which-key-sort-order #'which-key-key-order-alpha
-				which-key-sort-uppercase-first nil
-				which-key-add-column-padding 1
-				which-key-max-display-columns nil
-				which-key-min-display-lines 6
-				which-key-side-window-slot -10
-				which-key-side-window-max-height 0.25
-				which-key-idle-delay 0.8
-				which-key-max-description-length 25
-				which-key-allow-imprecise-window-fit t
-				which-key-separator " → " ))
+		which-key-sort-order #'which-key-key-order-alpha
+		which-key-sort-uppercase-first nil
+		which-key-add-column-padding 1
+		which-key-max-display-columns nil
+		which-key-min-display-lines 6
+		which-key-side-window-slot -10
+		which-key-side-window-max-height 0.25
+		which-key-idle-delay 0.8
+		which-key-max-description-length 25
+		which-key-allow-imprecise-window-fit t
+		which-key-separator " → " ))
+
+(use-package smart-comment
+  :ensure t)
 
 (use-package hl-todo
   :hook (prog-mode . hl-todo-mode))
@@ -196,7 +203,7 @@
   :mode ("README\\.md\\'" . gfm-mode)
   :init (setq markdown-command "multimarkdown")
   :bind (:map markdown-mode-map
-							("C-c C-e" . markdown-do)))
+			  ("C-c C-e" . markdown-do)))
 
 (use-package go-mode
   :ensure t
@@ -206,10 +213,10 @@
   (go-mode . lsp-deferred))
 
 (use-package rustic
-	:ensure t
-	:custom (rustic-analyzer-command '("rustup" "run" "gentoo" "rust-analyzer"))
-	:hook
-	(rustic-mode . lsp-deferred))
+  :ensure t
+  :custom (rustic-analyzer-command '("rustup" "run" "gentoo" "rust-analyzer"))
+  :hook
+  (rustic-mode . lsp-deferred))
 
 (use-package elixir-mode
   :ensure t
