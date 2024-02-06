@@ -23,6 +23,7 @@
 (setq-default indent-tabs-mode nil)
 (c-set-offset 'case-label '+)
 (c-set-offset 'access-label '/)
+(add-hook 'c++-mode-hook 'lsp-ui)
 ;; (add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
 
 (setq javascript-indent-level 2) ; javascript-mode
@@ -102,6 +103,10 @@
   (setq lsp-headerline-breadcrumb-enable nil))
 
 (use-package lsp-ui)
+
+(use-package flycheck
+  :ensure t
+  :init (global-flycheck-mode))
 
 (use-package company
   :ensure t
@@ -247,7 +252,7 @@
     "b r" '(revert-buffer :wk "Reload buffer")
 
     "c" '(:ignore t :wk "Comment")
-    "c l" '(comment-line :wk "Comment lines")
+    "c l" '(smart-comment :wk "Comment lines")
     
     "e" '(:ignore t :wk "Eshell/Evaluate")    
     "e b" '(eval-buffer :wk "Evaluate elisp in buffer")

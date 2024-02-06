@@ -11,16 +11,24 @@
     "vim.useSystemClipboard": true,
     "vim.visualModeKeyBindingsNonRecursive": [
         {
-            "before": ["p"],
-            "after": ["\"", "_", "d", "P"]
+            "before": [
+                "p"
+            ],
+            "after": [
+                "\"",
+                "_",
+                "d",
+                "P"
+            ]
         }
     ],
     "extensions.ignoreRecommendations": true,
     "workbench.colorCustomizations": {
-        "statusBar.foreground": "#000000",
+        "statusBar.foreground": "#ffffff",
         "statusBar.background": "#DFA419",
         "statusBar.noFolderBackground": "#DFA419",
-        "statusBar.debuggingBackground": "#DFA419"
+        "statusBar.debuggingBackground": "#DFA419",
+        "statusBar.debuggingForeground": "#ffffff"
     },
     "workbench.colorTheme": "Spacemacs - dark",
     "glassit.alpha": 240,
@@ -50,5 +58,9 @@
     "terminal.integrated.enableMultiLinePasteWarning": false,
     "rust-analyzer.checkOnSave.command": "clippy",
     "svelte.plugin.svelte.note-new-transformation": false,
-    "hediet.vscode-drawio.resizeImages": null
+    "hediet.vscode-drawio.resizeImages": null,
+    "eslint.validate": [
+        "javascript",
+        "svelte"
+    ]
 }
