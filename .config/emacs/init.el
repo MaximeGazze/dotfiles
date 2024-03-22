@@ -73,6 +73,7 @@
 
 ;; Packages
 (use-package evil
+  :ensure t
   :init
   (setq evil-want-integration t)
   (setq evil-want-keybinding nil)
@@ -84,6 +85,7 @@
   )
 
 (use-package evil-collection
+  :ensure t
   :after evil
   :config
   (setq evil-collection-mode-list '(dashboard dired ibuffer))
@@ -96,13 +98,41 @@
 ;;   :config
 ;;   (global-undo-tree-mode 1))
 
+(use-package vundo
+  :ensure t
+  :commands (vundo)
+  :config
+  (setq vundo-compact-display t)
+  (custom-set-faces
+   '(vundo-node ((t (:foreground "#808080"))))
+   '(vundo-stem ((t (:foreground "#808080"))))
+   '(vundo-highlight ((t (:foreground "#FFFF00")))))
+
+  ;; Use `HJKL` VIM-like motion, also Home/End to jump around.
+  (define-key vundo-mode-map (kbd "l") #'vundo-forward)
+  (define-key vundo-mode-map (kbd "<right>") #'vundo-forward)
+  (define-key vundo-mode-map (kbd "h") #'vundo-backward)
+  (define-key vundo-mode-map (kbd "<left>") #'vundo-backward)
+  (define-key vundo-mode-map (kbd "j") #'vundo-next)
+  (define-key vundo-mode-map (kbd "<down>") #'vundo-next)
+  (define-key vundo-mode-map (kbd "k") #'vundo-previous)
+  (define-key vundo-mode-map (kbd "<up>") #'vundo-previous)
+  (define-key vundo-mode-map (kbd "<home>") #'vundo-stem-root)
+  (define-key vundo-mode-map (kbd "<end>") #'vundo-stem-end)
+  (define-key vundo-mode-map (kbd "q") #'vundo-quit)
+  (define-key vundo-mode-map (kbd "C-g") #'vundo-quit)
+  (define-key vundo-mode-map (kbd "RET") #'vundo-confirm))
+
+(with-eval-after-load 'evil (evil-define-key 'normal 'global (kbd "C-M-u") 'vundo))
 
 (use-package lsp-mode
+  :ensure t
   :init
   (setq lsp-enable-snippet nil)
   (setq lsp-headerline-breadcrumb-enable nil))
 
-(use-package lsp-ui)
+(use-package lsp-ui
+  :ensure t)
 
 (use-package flycheck
   :ensure t
@@ -123,6 +153,7 @@
   :if (display-graphic-p))
 
 (use-package all-the-icons-dired
+  :ensure t
   :hook (dired-mode . (lambda () (all-the-icons-dired-mode t))))
 
 (use-package ivy
@@ -140,6 +171,7 @@
 			  ("<escape>" . minibuffer-keyboard-quit)))
 
 (use-package counsel
+  :ensure t
   :after ivy
   :config
   (counsel-mode))
@@ -174,15 +206,20 @@
 		eshell-visual-commands'("bash" "fish" "htop" "ssh" "top" "zsh")))
 
 (use-package spacemacs-theme
+  :ensure t
   :config (load-theme 'spacemacs-dark t))
 
 (use-package rainbow-mode
+  :ensure t
   :hook org-mode prog-mode)
 
-(use-package restart-emacs)
+(use-package restart-emacs
+  :ensure t)
 
 (use-package which-key
-  :init (which-key-mode 1)
+  :ensure t
+  :init
+  (which-key-mode 1)
   :config
   (setq which-key-side-window-location 'bottom
 		which-key-sort-order #'which-key-key-order-alpha
@@ -201,6 +238,7 @@
   :ensure t)
 
 (use-package hl-todo
+  :ensure t
   :hook (prog-mode . hl-todo-mode))
 
 (use-package markdown-mode
@@ -228,7 +266,13 @@
   :hook
   (before-save . elixir-format))
 
+(use-package yaml-mode
+  :ensure t
+  :hook
+  (yaml-mode . display-line-numbers-mode))
+
 (use-package general
+  :ensure t
   :config
   (general-evil-setup)
   
@@ -291,3 +335,16 @@
     "w J" '(buf-move-down :wk "Buffer move down")
     "w K" '(buf-move-up :wk "Buffer move up")
     "w L" '(buf-move-right :wk "Buffer move right")))
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(package-selected-packages
+   '(rustic smart-comment ivy-rich all-the-icons-ivy-rich all-the-icons markdown-mode go-mode flycheck elixir-mode company)))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
