@@ -248,6 +248,11 @@
   :bind (:map markdown-mode-map
 			  ("C-c C-e" . markdown-do)))
 
+(use-package yaml-mode
+  :ensure t
+  :hook
+  (yaml-mode . display-line-numbers-mode))
+
 (use-package go-mode
   :ensure t
   :hook
@@ -266,10 +271,28 @@
   :hook
   (before-save . elixir-format))
 
-(use-package yaml-mode
-  :ensure t
-  :hook
-  (yaml-mode . display-line-numbers-mode))
+;; (use-package tuareg
+;;   :ensure t
+;;   :mode (("\\.ocamlinit\\'" . tuareg-mode)))
+
+;; (use-package dune
+;;   :ensure t)
+
+;; (use-package merlin
+;;   :ensure t
+;;   :config
+;;   (add-hook 'tuareg-mode-hook #'merlin-mode)
+;;   (add-hook 'merlin-mode-hook #'company-mode)
+;;   (setq merlin-error-after-save nil))
+
+;; (use-package merlin-eldoc
+;;   :ensure t
+;;   :hook ((tuareg-mode) . merlin-eldoc-setup))
+
+;; (use-package flycheck-ocaml
+;;   :ensure t
+;;   :config
+;;   (flycheck-ocaml-setup))
 
 (use-package general
   :ensure t
@@ -335,13 +358,15 @@
     "w J" '(buf-move-down :wk "Buffer move down")
     "w K" '(buf-move-up :wk "Buffer move up")
     "w L" '(buf-move-right :wk "Buffer move right")))
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
-   '(rustic smart-comment ivy-rich all-the-icons-ivy-rich all-the-icons markdown-mode go-mode flycheck elixir-mode company)))
+   '(rustic smart-comment ivy-rich all-the-icons-ivy-rich all-the-icons markdown-mode go-mode flycheck elixir-mode company))
+ '(warning-suppress-types '((comp))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

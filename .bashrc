@@ -6,7 +6,7 @@
 [[ $- != *i* ]] && return
 
 alias ls='ls --color=auto'
-alias ll='ls -lah'
+alias ll='ls -lah --time-style=+%Y-%m-%d'
 alias ip='ip -c'
 alias config='/usr/bin/git --git-dir=$HOME/dotfiles/ --work-tree=$HOME'
 alias npm='pnpm'
