@@ -21,6 +21,7 @@
 (setq c-default-style "k&r"
       c-basic-offset 4)
 (setq-default indent-tabs-mode nil)
+(setq-default tab-width 4)
 (c-set-offset 'case-label '+)
 (c-set-offset 'access-label '/)
 (add-hook 'c++-mode-hook 'lsp-ui)
@@ -34,7 +35,6 @@
 (setq web-mode-css-indent-offset 2) ; web-mode, css in html file
 (setq web-mode-code-indent-offset 2) ; web-mode, js code in html file
 (setq css-indent-offset 2) ; css-mode
-(setq-default tab-width 4)
 
 ;; Fix bad defaults
 (setq x-select-enable-clipboard-manager nil)
@@ -239,6 +239,22 @@
 
 (use-package hl-todo
   :ensure t
+  :config (setq hl-todo-keyword-faces '(("HOLD"   . "#d0bf8f")
+                                        ("TODO"   . "#FF9900")
+                                        ("NEXT"   . "#dca3a3")
+                                        ("THEM"   . "#dc8cc3")
+                                        ("PROG"   . "#7cb8bb")
+                                        ("OKAY"   . "#7cb8bb")
+                                        ("DONT"   . "#5f7f5f")
+                                        ("FAIL"   . "#FF0000")
+                                        ("DONE"   . "#afd8af")
+                                        ("NOTE"   . "#d0bf8f")
+                                        ("MAYBE"  . "#d0bf8f")
+                                        ("KLUDGE" . "#d0bf8f")
+                                        ("HACK"   . "#9966FF")
+                                        ("TEMP"   . "#d0bf8f")
+                                        ("FIXME"  . "#994499")
+                                        ("DEBUG"  . "#FF0000")))
   :hook (prog-mode . hl-todo-mode))
 
 (use-package markdown-mode
@@ -271,6 +287,9 @@
   :hook
   (before-save . elixir-format))
 
+(use-package cmake-mode
+  :ensure t)
+
 ;; (use-package tuareg
 ;;   :ensure t
 ;;   :mode (("\\.ocamlinit\\'" . tuareg-mode)))
@@ -293,6 +312,24 @@
 ;;   :ensure t
 ;;   :config
 ;;   (flycheck-ocaml-setup))
+
+(use-package polymode
+  :ensure t
+  :config
+  ;; poly-pio-mode
+  (define-hostmode poly-pio-hostmode
+    :mode 'asm-mode)
+  (define-innermode poly-pio-c-innermode
+    :mode 'c-mode
+    :head-matcher "^% c-sdk {$"
+    :tail-matcher "^%}$"
+    :head-mode 'host
+    :tail-mode 'host)
+  (define-polymode poly-pio-mode
+    :hostmode 'poly-pio-hostmode
+    :innermodes '(poly-pio-c-innermode))
+  (add-to-list 'auto-mode-alist '("\\.pio$" . poly-pio-mode))
+  )
 
 (use-package general
   :ensure t
@@ -321,7 +358,7 @@
     "c" '(:ignore t :wk "Comment")
     "c l" '(smart-comment :wk "Comment lines")
     
-    "e" '(:ignore t :wk "Eshell/Evaluate")    
+    "e" '(:ignore t :wk "Eshell/Evaluate")
     "e b" '(eval-buffer :wk "Evaluate elisp in buffer")
     "e d" '(eval-defun :wk "Evaluate defun containing or after point")
     "e e" '(eval-expression :wk "Evaluate and elisp expression")
