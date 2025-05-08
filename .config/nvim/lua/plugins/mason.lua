@@ -1,4 +1,8 @@
 return {
     'williamboman/mason.nvim',
-    opts = {},
+    opts = {
+        ensure_installed = {
+            'goimports',
+        },
+    },
 }

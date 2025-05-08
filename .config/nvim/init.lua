@@ -12,9 +12,9 @@ vim.api.nvim_set_hl(0, "Normal", {
     guibg = none,
 })
 
-vim.api.nvim_create_autocmd("BufWritePre", {
-    pattern = { "*.lua", "*.rs", "*.go" },
-    callback = function()
-        vim.lsp.buf.format()
-    end,
-})
+-- vim.api.nvim_create_autocmd("BufWritePre", {
+--     pattern = { "*.lua", "*.rs", "*.go" },
+--     callback = function()
+--         vim.lsp.buf.format()
+--     end,
+-- })

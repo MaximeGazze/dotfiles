@@ -1,3 +1,0 @@
-fix todo comments
-add whichkey
-add telescope

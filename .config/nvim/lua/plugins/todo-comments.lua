@@ -7,6 +7,3 @@ return {
     },
     dependencies = { 'nvim-lua/plenary.nvim' },
 }
-
--- TODO asd
--- TODO adasd

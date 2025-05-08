@@ -4,6 +4,7 @@ return {
         opts = {
             ensure_installed = {
                 'lua_ls',
+                'clangd',
                 'rust_analyzer',
                 'gopls',
             },
@@ -23,7 +24,9 @@ return {
                             version = 'LuaJIT',
                         },
                         diagnostics = {
-                            globals = { 'vim' },
+                            globals = {
+                                'vim',
+                            },
                         },
                         workspace = {
                             library = vim.api.nvim_get_runtime_file('', true),
@@ -47,6 +50,15 @@ return {
                             shadow = true,
                         },
                         staticcheck = true,
+                    },
+                },
+            }))
+
+            -- C/C++
+            lspconfig.clangd.setup(coq.lsp_ensure_capabilities({
+                settings = {
+                    clangd = {
+                        completeUnimported = true,
                     },
                 },
             }))
