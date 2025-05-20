@@ -1,5 +1,6 @@
 return {
 	"ms-jpq/coq_nvim",
+	enabled = false,
 	branch = "coq",
 	init = function()
 		vim.g.coq_settings = {
@@ -30,10 +31,12 @@ return {
 			{ expr = true, silent = true }
 		)
 		vim.api.nvim_set_keymap("i", "<BS>", [[pumvisible() ? "\<C-e><BS>" : "\<BS>"]], { expr = true, silent = true })
-		vim.api.nvim_set_keymap("i", "<CR>", [[pumvisible() ? "\<C-e><CR>" : "\<CR>"]], { expr = true, silent = true })
-		-- vim.api.nvim_set_keymap('i', '<CR>',
-		--     [[pumvisible() ? (complete_info().selected == -1 ? "\<C-e><CR>" : "\<C-y>") : "\<CR>"]],
-		--     { expr = true, silent = true })
+		vim.api.nvim_set_keymap(
+			"i",
+			"<CR>",
+			[[pumvisible() ? (complete_info().selected == -1 ? "\<C-e><CR>" : "\<C-y>") : "\<CR>"]],
+			{ expr = true, silent = true }
+		)
 		vim.api.nvim_set_keymap(
 			"i",
 			"<Tab>",
